@@ -150,3 +150,7 @@ EMAIL_HOST_USER = 'kelechiuma@gmail.com'
 EMAIL_HOST_PASSWORD = 'Kusjaypassword1.'
 EMAIL_USE_TLS = True
 
+try:
+    from .local_settings import *
+except ImportError:
+    pass
