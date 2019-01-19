@@ -13,7 +13,7 @@ def register(request):
         password = request.POST['password']
         password2 = request.POST['password2']
 
-        # Checki if passwords match
+        # Check if passwords match
         if password == password2:
             # Check Username and email
             if User.objects.filter(username=username).exists():
@@ -56,6 +56,7 @@ def login(request):
     else:
         return render(request, 'accounts/login.html')
 
+
 def logout(request):
     if request.method == 'POST':
         auth.logout(request)
@@ -63,6 +64,10 @@ def logout(request):
         return redirect('index')
 
 def dashboard(request):
+    if not request.user.is_authenticated:
+        messages.error(request, 'Please login to acces the dashboard page')
+        return redirect('login')
+
     user_contacts = Contact.objects.order_by('-contact_date').filter(user_id=request.user.id)
 
     context = {
