@@ -18,6 +18,7 @@ def index(request):
 
     return render(request, 'pages/index.html', context)
 
+
 def about(request):
     # Get all realtors
     realtors = Realtor.objects.order_by('-hire_date')
@@ -31,5 +32,3 @@ def about(request):
     }
 
     return render(request, 'pages/about.html', context)
-
-
